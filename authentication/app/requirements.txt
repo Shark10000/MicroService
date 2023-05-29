@@ -1,0 +1,11 @@
+databases[postgresql]
+fastapi
+SQLAlchemy
+uvicorn
+psycopg2-binary
+app
+python-jose
+passlib
+python-multipart
+pydantic
+pydantic[email]

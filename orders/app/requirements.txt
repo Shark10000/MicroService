@@ -1,0 +1,9 @@
+databases[postgresql]
+fastapi
+SQLAlchemy
+uvicorn
+psycopg2-binary
+app
+httpx
+requests
+asyncio

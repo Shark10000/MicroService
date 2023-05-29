@@ -1,0 +1,51 @@
+version: '3.10'
+
+services:
+  authentication:
+    container_name: authentication
+    build: ./authentication/app
+    ports:
+      - "8010:8010"
+    restart: always
+    links:
+      - db2
+    networks:
+      - enrollment
+
+  db2:
+    container_name: db2
+    image: postgres:15.2-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    networks:
+      - enrollment
+
+  orders:
+    container_name: orders
+    build: ./orders/app
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - db
+      - authentication
+    links:
+      - db
+    networks:
+      - enrollment
+
+  db:
+    container_name: db
+    image: postgres:15.2-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    networks:
+      - enrollment
+
+
+
+networks:
+  enrollment:
+    driver: bridge
